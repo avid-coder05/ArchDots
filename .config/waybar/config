@@ -1,0 +1,139 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "overlay",
+    "position": "top",
+    "height": 30, // Waybar height (to be removed for auto height)
+    "width": 1800,
+    "margin-right": 1100,
+    "margin-left": 0,
+    "spacing": 10, // Gaps between modules (4px)
+    "exclusive": true,
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+	"custom/spacing",
+    ],
+    "modules-center": [
+	"hyprland/window"
+    ],
+    "modules-right": [
+	"brightness/slider",
+	"network",
+	"bluetooth",
+	"pulseaudio",
+	"battery",
+	"clock",
+	"custom/power"
+    ],
+    "hyprland/workspaces": {
+	"format": "{icon}",
+	"format-icons": {
+	    "active": "●",
+	    "default": "⚬",
+	},
+	"persistent_workspaces": {
+	    "*": 3,
+	}
+    },
+    "hyprland/window": {
+	"format": "🔸{class}",
+	"all-outputs": true,
+	"max-length": 1000,
+    },
+    "brightness/slider": {
+	"min": 0,
+	"max": 100,
+	"orientation": "horizontal"
+    },
+    "clock": {
+        "timezone": "Asia/Kolkata",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "battery": {
+        "states": {
+            "good": 199,
+            "warning": 30,
+            "critical": 10
+        },
+	"interval": 5,
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ⚡️",
+        "format-plugged": "{capacity}% 🔌",
+        "format-icons": ["", "", "", "", ""],
+	"tooltip": true,
+	"ttoltip-format": "{time}"
+    },
+    /* "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    }, */
+    "network": {
+        "format-wifi": "{icon}	| {bandwidthDownBits}  | {bandwidthUpBits} ",
+	"interval": 2,
+        "format-ethernet": "󰈁 | {bandwidthDownBits}  | {bandwidthUpBits} ",
+	"tooltip": true,
+        "tooltip-format": "{essid} | {frequency}GHz",
+	"tooltip-format-ethernet": "{ipaddr}",
+	"tooltip-padding": 2,
+        "format-linked": "{ifname} (No IP)  ",
+        "format-disconnected": "Disconnected ⚠",
+	"on-click": "$HOME/.config/rofi/scripts/wifi-menu.sh",
+	"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "]
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} | {format_source}",
+	"format-bluetooth": "{volume}% 󰗾 | {format_source}",
+        "format-bluetooth-muted": "{volume}% 󰗿  | {format_source}",
+	"format-muted": " | {format_source}",
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": " ",
+	"tooltip": false,
+        "format-icons": {
+            "headphone": "☊ ",
+            "hands-free": "",
+            "headset": "",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": "󰦢 "
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    },
+    "custom/power": {
+        "format" : " ⏻ ",
+	"tooltip": false,
+	"return-type": "none",
+	"on-click": "$HOME/.config/rofi/powermenu/type-6/powermenu.sh"
+    },
+    "bluetooth": {
+	"format": "  ",
+	"format-off": "󰂲 - Off",
+	"format-connected": " 󰂱 ",
+	"format-connected-battery": "󰂱  | 󰥉 - {device_battery_percentage}%",
+	"tooltip": true,
+	"tooltip-format": "Not Connected",
+	"tooltip-format-connected": "{device_alias}",
+	"on-click": "$HOME/.config/waybar/scripts/rofi-bluetooth"
+    }
+}
+

@@ -1,0 +1,155 @@
+* {
+    font-family: "CommitMono Nerd", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    padding: 2px;
+    color: rgb(176, 248, 255);
+}
+
+.tooltip {
+    background: black;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.7);
+    transition-property: background-color;
+    transition-duration: .5s;
+    box-shadow: 0.05rem 0.05rem 0.3rem rgb(163, 25, 255) inset;
+    border-radius: 5rem;
+}
+
+#workspaces {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-left: 0.5em;
+    border-right: 0.1rem solid rgb(163, 25, 255);
+    border-radius: 5rem;
+    padding-right: 0.5rem;
+}
+
+#workspaces button {
+    padding: 0 0.5em;
+    margin: 0.1em 0.1em;
+    border-radius: 5em;
+}
+
+#workspaces button:hover {
+    background: transparent;
+}
+
+#window {
+    background: transparent;
+    padding: 0 0.5rem;
+    border-bottom: 0.1rem solid rgb(255, 132, 0);
+    border-radius: 5rem;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#mpd {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#clock {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left: 0.1rem solid rgb(165, 25, 255);
+    border-radius: 5rem;
+    padding-left: 1.5rem;
+}
+
+#battery {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left: 0.1rem solid rgb(165, 25, 255);
+    transition-property: background-color, color;
+    transition-duration: 0.5s;
+    padding-right: 1rem;
+    border-radius: 5rem;
+    padding-left: 1.5rem;
+    transition-duration: 0.5s;
+}
+
+#battery.good {
+    color: green;
+}
+
+#battery.warning {
+    color: orange;
+}
+
+#battery.charging, #battery.plugged {
+    color: yellow;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        color: #ff0000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    color: rgb(255, 133, 3);
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(10);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#custom-power {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-left: 0.1rem solid rgb(165, 3, 252);
+    border-radius: 5rem;
+    padding-right: 0.4rem;
+}
+
+#network {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left: 0.1rem solid rgb(163, 25, 255);
+    border-radius: 5rem;
+    padding-left: 1.5rem;
+}
+
+#network.disabled {
+    color: red;
+}
+
+#network.disconnected {
+    color: yellow;
+}
+
+#bluetooth {
+    padding-left: 1rem;
+    border-left: 0.1rem solid rgb(163, 25, 255);
+    border-radius: 5rem;
+}
+
+#pulseaudio {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left: 0.1rem solid rgb(163, 25, 255);
+    border-radius: 5rem;
+    padding-left: 1rem;
+}
+
+#mpd {
+    background-color: #66cc99;
+    color: #2a5c45;
+}
+
+#mpd.disconnected {
+    background-color: #f53c3c;
+}
+
+#mpd.stopped {
+    background-color: #90b1b1;
+}
+
+#mpd.paused {
+    background-color: #51a37a;
+}
